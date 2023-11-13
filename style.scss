@@ -4,6 +4,8 @@
 // }
 * {
   --green: #c0ff4a;
+  --black: #000;
+  --white: #fffef2;
 }
 
 [data-animation='title'],
@@ -37,14 +39,17 @@
 //     opacity: 1;
 //   }
 // }
+
 body {
-  transition: background-color, color;
+  transition: background-color;
   transition-duration: 0.6s;
   transition-timing-function: ease-in-out;
 }
 .black {
-  background-color: #000;
+  background-color: var(--black);
 }
+
+// Button Color Transition
 
 .green,
 .white {
@@ -69,6 +74,8 @@ body {
   }
 }
 
+// 3D Marquee Color Transition
+
 .green {
   background-color: var(--green);
   .cuboid_marquee_face_1,
@@ -82,8 +89,10 @@ body {
   }
 }
 .white {
-  background-color: #fffef2;
+  background-color: var(--white);
 }
+
+// Color Transition on fonts
 
 h1,
 h2,
@@ -94,6 +103,71 @@ h6,
 p,
 blockquote {
   transition: color;
-  transition-duration: 0.6s;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
+}
+
+// Color transition on logos
+.background_black {
+  .home_featured_client_media {
+    filter: invert(1) opacity(0.7);
+    transition: filter 0.3s ease;
+  }
+
+  .brand {
+    color: var(--black);
+  }
+}
+.white,
+.green {
+  .home_featured_client_media {
+    filter: invert(0) opacity(1);
+  }
+}
+
+// Color transition on Navbar
+.navbar {
+  transition: background-color 0.6s ease;
+}
+.black {
+  .navbar {
+    background-color: var(--black);
+  }
+  .brand,
+  .brand_wordmark_media {
+    color: var(--white);
+  }
+
+  .menu_button_line {
+    background-color: var(--white);
+  }
+}
+
+.nav_open {
+  .brand,
+  .brand_wordmark_media {
+    color: var(--white) !important;
+    transition: color 0.5s ease;
+  }
+  .menu_button_line {
+    background-color: var(--white);
+    transition: all 0.5s ease;
+
+    transform: translate3d(0.5rem, 0.75rem, 0px) rotateZ(-45deg);
+  }
+  .menu_button_line.is_bottom {
+    transform: translate3d(0.5rem, -0.4rem, 0px) rotateZ(45deg);
+  }
+
+  body {
+    overflow: hidden !important;
+  }
+}
+
+.brand,
+.brand_wordmark_media {
+  transition: color 0.5s ease 0.5s;
+}
+.menu_button_line {
+  transition: all 0.5s ease 0.3s;
 }

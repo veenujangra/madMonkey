@@ -55,20 +55,21 @@ export default class CardAnimation extends Animation {
   }
 
   animateOut() {
-    this.tl = gsap.timeline({ duration: 0 })
-    this.tl
-      .to(this.elements[0], {
-        rotateZ: '-15deg',
-        x: '-15rem',
-      })
-      .to(
-        this.elements[2],
-        {
-          rotateZ: '15deg',
-          x: '15rem',
-        },
-        '-=1'
-      )
+    this.setAnimation()
+    // this.tl = gsap.timeline({ duration: 0 })
+    // this.tl
+    //   .to(this.elements[0], {
+    //     rotateZ: '-15deg',
+    //     x: '-15rem',
+    //   })
+    //   .to(
+    //     this.elements[2],
+    //     {
+    //       rotateZ: '15deg',
+    //       x: '15rem',
+    //     },
+    //     '-=1'
+    //   )
   }
 
   onResize() {}

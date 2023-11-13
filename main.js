@@ -1,12 +1,24 @@
 import './style.scss'
 import Page from './src/Page'
+import Navigation from './src/navbar'
 
 class App {
   constructor(options) {
     this.element = options.main
 
+    this.createPreloader()
+    this.createNavigation()
+
     this.createPage()
     this.addEventListeners()
+  }
+
+  createPreloader() {}
+
+  createNavigation() {
+    this.navigation = new Navigation({
+      element: '.navbar',
+    })
   }
 
   async createPage() {
