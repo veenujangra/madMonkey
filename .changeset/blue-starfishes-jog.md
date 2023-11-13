@@ -1,0 +1,5 @@
+---
+"@pixeto/madmonkey": patch
+---
+
+Nav
