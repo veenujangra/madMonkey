@@ -1,6 +1,7 @@
 import './style.scss'
 import Page from './src/Page'
 import Navigation from './src/navbar'
+import Preloader from './src/preloader'
 
 class App {
   constructor(options) {
@@ -13,7 +14,15 @@ class App {
     this.addEventListeners()
   }
 
-  createPreloader() {}
+  createPreloader() {
+    this.preloader = new Preloader({
+      element: '.preloader_wrapper',
+      elementMedia: '.preloader_media',
+      elementVideo: '#preloader-video',
+      heroVideo: '#hero_video',
+      preloaderTitle: '.preloader_title',
+    })
+  }
 
   createNavigation() {
     this.navigation = new Navigation({
@@ -21,12 +30,7 @@ class App {
     })
   }
 
-  async createPage() {
-    await document.readyState
-    await document.fonts.ready
-
-    document.documentElement.classList.add('loaded')
-
+  createPage() {
     this.page = new Page({
       element: this.element,
     })
