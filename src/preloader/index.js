@@ -3,14 +3,25 @@ import SplitType from 'split-type'
 
 export default class Preloader {
   constructor(options) {
-    this.element = document.querySelector(options.element)
-    this.elementMedia = document.querySelector(options.elementMedia)
-    this.video = document.querySelector(options.elementVideo)
-    this.elementImage = this.elementMedia.querySelector('img')
-    this.heroVideoElement = document.querySelector(options.heroVideo)
-    this.preloaderTitle = document.querySelector(options.preloaderTitle)
+    if (window.location.pathname === '/') {
+      this.element = document.querySelector(options.element)
+      this.elementMedia = document.querySelector(options.elementMedia)
+      this.video = document.querySelector(options.elementVideo)
+      this.elementImage = this.elementMedia.querySelector('img')
+      this.heroVideoElement = document.querySelector(options.heroVideo)
+      this.preloaderTitle = document.querySelector(options.preloaderTitle)
 
-    this.create()
+      this.create()
+    } else {
+      this.loadWithoutPreloader()
+    }
+  }
+
+  async loadWithoutPreloader() {
+    await document.readyState
+    await document.fonts.ready
+
+    document.documentElement.classList.add('loaded')
   }
 
   async loadMedia() {
