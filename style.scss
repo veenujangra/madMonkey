@@ -6,6 +6,7 @@
   --green: #c0ff4a;
   --black: #000;
   --white: #fffef2;
+  --orange: #ff8400;
 }
 
 [data-animation='title'],
@@ -53,11 +54,19 @@ body {
 // Button Color Transition
 
 .green,
-.white {
+.white,
+.orange {
+  color: black;
+
   .title_2-8,
   .title_10,
+  .title_18,
+  .title_15,
   blockquote {
     color: black !important;
+  }
+  .divider.on_service {
+    background-color: #000;
   }
   .button_primary {
     background-color: #000;
@@ -70,8 +79,25 @@ body {
   .project_link {
     color: black !important;
   }
+}
+
+.green {
   .home_featured_client_wrapper {
     background-color: #ade348;
+  }
+}
+.white {
+  .home_featured_client_wrapper {
+    background-color: #efeee0;
+  }
+  .title_46 {
+    color: #efeee0;
+  }
+}
+
+.orange {
+  .title_26 {
+    color: #ddff36;
   }
 }
 
@@ -91,6 +117,19 @@ body {
 }
 .white {
   background-color: var(--white);
+}
+
+.orange {
+  background-color: var(--orange);
+  .navbar {
+    background-color: transparent;
+  }
+  .brand_logo_abstract,
+  .brand_logo_m,
+  .brand_logo_a,
+  .brand_logo_d {
+    fill: white !important;
+  }
 }
 
 // Color Transition on fonts
@@ -171,4 +210,23 @@ blockquote {
 }
 .menu_button_line {
   transition: all 0.5s ease 0.3s;
+}
+
+// Work Page
+
+.work_card_title:hover {
+  // margin: 4rem 0rem;
+  transform: scale3d(1.2, 1.2, 1);
+
+  .title_21 {
+    mix-blend-mode: multiply;
+  }
+
+  .work_card_media {
+    opacity: 1;
+  }
+}
+.work_card_media {
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }

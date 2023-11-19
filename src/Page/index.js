@@ -7,6 +7,7 @@ import CardAnimation from '../animations/cardAnimation'
 import ColorTransition from '../animations/color'
 import gsap from 'gsap'
 import Lenis from '@studio-freight/lenis'
+import Preloader from '../preloader'
 
 export default class Page {
   constructor(options) {

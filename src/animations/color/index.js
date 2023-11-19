@@ -20,6 +20,8 @@ export default class ColorTransition {
       return 'green'
     } else if (this.colorCode === '#FFFEF2') {
       return 'white'
+    } else if (this.colorCode === '#FF8400') {
+      return 'orange'
     }
   }
 
