@@ -24,7 +24,7 @@ export default class SlideUp extends Animation {
   setProperties() {
     gsap.set(this.text, {
       autoAlpha: 0,
-      y: 100,
+      y: 50,
     })
   }
 
@@ -41,7 +41,7 @@ export default class SlideUp extends Animation {
       this.text,
       {
         autoAlpha: 0,
-        y: 100,
+        y: 50,
       },
       {
         autoAlpha: 1,

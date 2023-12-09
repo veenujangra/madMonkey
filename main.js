@@ -21,6 +21,7 @@ class App {
       elementVideo: '#preloader-video',
       heroVideo: '#hero_video',
       preloaderTitle: '.preloader_title',
+      playButton: '.home_hero_video_play_button',
     })
   }
 

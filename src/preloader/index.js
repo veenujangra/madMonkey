@@ -1,4 +1,6 @@
 import gsap from 'gsap'
+import CustomEase from 'gsap/CustomEase'
+import { each } from 'lodash'
 import SplitType from 'split-type'
 
 export default class Preloader {
@@ -10,6 +12,7 @@ export default class Preloader {
       this.elementImage = this.elementMedia.querySelector('img')
       this.heroVideoElement = document.querySelector(options.heroVideo)
       this.preloaderTitle = document.querySelector(options.preloaderTitle)
+      this.playButton = document.querySelector(options.playButton)
 
       this.create()
     } else {
@@ -18,7 +21,6 @@ export default class Preloader {
   }
 
   async loadWithoutPreloader() {
-    await document.readyState
     await document.fonts.ready
 
     document.documentElement.classList.add('loaded')
@@ -63,7 +65,6 @@ export default class Preloader {
         this.video.play()
       })
     )
-    await document.readyState
     await document.fonts.ready
 
     return Promise.all(this.mediaPromises)
@@ -71,6 +72,25 @@ export default class Preloader {
 
   async create() {
     await this.loadMedia()
+
+    this.tl = gsap.timeline()
+
+    // Adding more titles
+    for (let i = 0; i < 10; i++) {
+      const clone = this.preloaderTitle.cloneNode(true)
+      this.element.appendChild(clone)
+    }
+
+    this.preloaderTitles = [...document.querySelectorAll('.preloader_title')]
+
+    each(this.preloaderTitles, (title, index) => {
+      const pos_y = Math.trunc(((Math.floor(this.preloaderTitles.length / 2) - index) * this.preloaderTitles.length) / 10)
+      // console.log(pos_y)
+      this.tl.set(title, {
+        y: `${pos_y * 100}%`,
+      })
+    })
+
     this.animateIn()
   }
 
@@ -143,7 +163,7 @@ export default class Preloader {
 
     this.tl = gsap.timeline({
       onStart: () => {
-        this.heroVideoElement.play()
+        // this.heroVideoElement.play()
       },
       onComplete: () => {
         this.element.remove()
@@ -177,19 +197,29 @@ export default class Preloader {
           delay: 0.5,
         }
       )
-      .fromTo(
-        this.text.chars,
+      .to(
+        this.preloaderTitles,
         {
-          autoAlpha: 1,
           y: 0,
+          duration: 1,
+          ease: 'power4.in',
         },
+        '<-1.5'
+      )
+      .to(this.preloaderTitles, {
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: 'power4.out',
+      })
+      .fromTo(
+        this.playButton,
         {
           autoAlpha: 0,
-          y: 10,
-          ease: 'power4.out',
-          stagger: 0.05,
+        },
+        {
+          autoAlpha: 1,
           duration: 0.4,
-          delay: 0,
+          ease: 'power4.out',
         }
       )
   }

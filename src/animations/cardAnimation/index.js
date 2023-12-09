@@ -1,6 +1,7 @@
 import { each } from 'lodash'
 import Animation from '..'
 import gsap from 'gsap'
+import CustomEase from 'gsap/CustomEase'
 
 export default class CardAnimation extends Animation {
   constructor({ element }) {
@@ -36,19 +37,19 @@ export default class CardAnimation extends Animation {
   }
 
   animateIn() {
-    this.tl = gsap.timeline({ delay: 0.2 })
+    this.tl = gsap.timeline({ delay: 0.3 })
     this.tl
       .to(this.elements[0], {
         x: '-50rem',
         duration: 1,
-        ease: 'Power1.easeInOut',
+        ease: 'back.out(1.7)',
       })
       .to(
         this.elements[2],
         {
           x: '50rem',
           duration: 1,
-          ease: 'Power1.easeInOut',
+          ease: 'back.out(1.7)',
         },
         '-=1'
       )

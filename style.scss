@@ -14,9 +14,9 @@
   font-kerning: none;
 }
 
-// .line_wrapper {
-//   overflow: hidden;
-// }
+.line_wrapper {
+  overflow: hidden;
+}
 
 .main {
   opacity: 0;
@@ -155,13 +155,18 @@ blockquote {
   }
 
   .brand {
-    color: var(--black);
+    color: var(--white);
   }
 }
 .white,
 .green {
   .home_featured_client_media {
     filter: invert(0) opacity(1);
+  }
+  .brand,
+  .brand_wordmark_media,
+  .menu_button {
+    color: var(--black);
   }
 }
 
@@ -170,9 +175,10 @@ blockquote {
   transition: background-color 0.6s ease;
 }
 .black {
-  .navbar {
-    background-color: var(--black);
-  }
+  // .navbar {
+  //   background-color: var(--black);
+  // }
+
   .brand,
   .brand_wordmark_media {
     color: var(--white);
@@ -229,4 +235,50 @@ blockquote {
 .work_card_media {
   opacity: 0;
   transition: opacity 0.4s ease;
+}
+
+.background_black,
+.black {
+  .button_primary {
+    .button_primary_icon_media {
+      border-color: #d6d5c5;
+      transition: border-color 0.5s ease;
+    }
+    :hover {
+      .button_primary_icon_media {
+        border-color: var(--black);
+      }
+    }
+  }
+}
+
+.background_black,
+.black {
+  .button_primary {
+    .button_primary_icon_media {
+      border-color: #d6d5c5;
+      transition: border-color 0.5s ease;
+    }
+    :hover {
+      .button_primary_icon_media {
+        border-color: var(--black);
+      }
+    }
+  }
+}
+
+.orange,
+.green,
+.white {
+  .button_primary {
+    .button_primary_icon_media {
+      border-color: #464646;
+      transition: border-color 0.5s ease;
+    }
+    :hover {
+      .button_primary_icon_media {
+        border-color: var(--white);
+      }
+    }
+  }
 }
