@@ -41,6 +41,7 @@ export default class Title extends Animation {
     if (this.element.classList.contains('visible')) return
 
     this.tl = gsap.timeline({
+      delay: this.animationOptions.delay,
       onComplete: () => {
         this.element.classList.add('visible')
       },
@@ -58,7 +59,6 @@ export default class Title extends Animation {
         ease: this.animationOptions.ease,
         stagger: this.animationOptions.stagger,
         duration: this.animationOptions.duration,
-        delay: this.animationOptions.delay,
       }
     )
   }
