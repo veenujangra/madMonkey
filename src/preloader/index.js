@@ -1,5 +1,4 @@
 import gsap from 'gsap'
-import CustomEase from 'gsap/CustomEase'
 import { each } from 'lodash'
 import SplitType from 'split-type'
 
@@ -73,6 +72,11 @@ export default class Preloader {
   async create() {
     await this.loadMedia()
 
+    // this.initTitle()
+    this.animateIn()
+  }
+
+  initTitle() {
     this.tl = gsap.timeline()
 
     // Adding more titles
@@ -90,8 +94,6 @@ export default class Preloader {
         y: `${pos_y * 100}%`,
       })
     })
-
-    this.animateIn()
   }
 
   animateIn() {
@@ -163,7 +165,7 @@ export default class Preloader {
 
     this.tl = gsap.timeline({
       onStart: () => {
-        // this.heroVideoElement.play()
+        this.heroVideoElement.play()
       },
       onComplete: () => {
         this.element.remove()
@@ -197,20 +199,35 @@ export default class Preloader {
           delay: 0.5,
         }
       )
-      .to(
-        this.preloaderTitles,
+      // .to(
+      //   this.preloaderTitles,
+      //   {
+      //     y: 0,
+      //     duration: 1,
+      //     ease: 'power4.in',
+      //   },
+      //   '<-1.5'
+      // )
+      // .to(this.preloaderTitles, {
+      //   autoAlpha: 0,
+      //   duration: 0.8,
+      //   ease: 'power4.out',
+      // })
+      .fromTo(
+        this.text.chars,
         {
           y: 0,
-          duration: 1,
-          ease: 'power4.in',
+          autoAlpha: 1,
         },
-        '<-1.5'
+        {
+          autoAlpha: 0,
+          y: 10,
+          ease: 'power4.out',
+          stagger: 0.05,
+          duration: 0.8,
+          delay: 0,
+        }
       )
-      .to(this.preloaderTitles, {
-        autoAlpha: 0,
-        duration: 0.8,
-        ease: 'power4.out',
-      })
       .fromTo(
         this.playButton,
         {
