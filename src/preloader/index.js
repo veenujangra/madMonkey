@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 import { each } from 'lodash'
 import SplitType from 'split-type'
+import CustomEase from 'gsap/CustomEase'
 
 export default class Preloader {
   constructor(options) {
@@ -12,6 +13,9 @@ export default class Preloader {
       this.heroVideoElement = document.querySelector(options.heroVideo)
       this.preloaderTitle = document.querySelector(options.preloaderTitle)
       this.playButton = document.querySelector(options.playButton)
+
+      this.initTitle()
+      this.set()
 
       this.create()
     } else {
@@ -72,28 +76,50 @@ export default class Preloader {
   async create() {
     await this.loadMedia()
 
-    // this.initTitle()
-    this.animateIn()
+    // this.animateIn()
+    this.animateOut()
   }
 
+  set() {
+    each(this.text.words, (word) => {
+      this.tl.set(word.parentNode.parentNode, {
+        filter: 'blur(7px)',
+      })
+      this.tl.set(word.children, {
+        y: '120%',
+      })
+    })
+  }
+
+  // Not being used
   initTitle() {
     this.tl = gsap.timeline()
 
-    // Adding more titles
-    for (let i = 0; i < 10; i++) {
-      const clone = this.preloaderTitle.cloneNode(true)
-      this.element.appendChild(clone)
-    }
+    this.text = new SplitType(this.preloaderTitle)
 
-    this.preloaderTitles = [...document.querySelectorAll('.preloader_title')]
-
-    each(this.preloaderTitles, (title, index) => {
-      const pos_y = Math.trunc(((Math.floor(this.preloaderTitles.length / 2) - index) * this.preloaderTitles.length) / 10)
-      // console.log(pos_y)
-      this.tl.set(title, {
-        y: `${pos_y * 100}%`,
-      })
+    this.text.lines.forEach((item) => {
+      var parent = item.parentNode
+      var wrapper = document.createElement('div')
+      wrapper.classList.add('line_wrapper')
+      parent.replaceChild(wrapper, item)
+      wrapper.appendChild(item)
     })
+
+    // Adding more titles
+    // for (let i = 0; i < 10; i++) {
+    //   const clone = this.preloaderTitle.cloneNode(true)
+    //   this.element.appendChild(clone)
+    // }
+
+    // this.preloaderTitles = [...document.querySelectorAll('.preloader_title')]
+
+    // each(this.preloaderTitles, (title, index) => {
+    //   const pos_y = Math.trunc(((Math.floor(this.preloaderTitles.length / 2) - index) * this.preloaderTitles.length) / 10)
+
+    //   this.tl.set(title, {
+    //     y: `${pos_y * 100}%`,
+    //   })
+    // })
   }
 
   animateIn() {
@@ -127,37 +153,57 @@ export default class Preloader {
     this.elementMedia.remove()
     this.video.parentNode.remove()
 
-    this.text = new SplitType(this.preloaderTitle)
-
-    this.text.lines.forEach((item) => {
-      var parent = item.parentNode
-      var wrapper = document.createElement('div')
-      wrapper.classList.add('line_wrapper')
-      parent.replaceChild(wrapper, item)
-      wrapper.appendChild(item)
-    })
-
     this.tl = gsap.timeline({
       onComplete: () => {
         this.heroAnimation()
       },
     })
 
-    this.tl.fromTo(
-      this.text.chars.reverse(),
-      {
-        autoAlpha: 0,
-        y: 10,
-      },
-      {
-        autoAlpha: 1,
-        y: 0,
-        ease: 'power4.out',
-        stagger: 0.05,
-        duration: 0.4,
-        delay: 0,
-      }
-    )
+    gsap.registerPlugin(CustomEase)
+
+    each(this.text.words, (word) => {
+      this.tl.fromTo(
+        word.parentNode.parentNode,
+        {
+          filter: 'blur(7px)',
+        },
+        {
+          filter: 'blur(0px)',
+          duration: 1.5,
+          ease: 'power1.out',
+        },
+        '<0.04'
+      )
+      this.tl.fromTo(
+        word.children,
+        {
+          y: '120%',
+        },
+        {
+          y: 0,
+          ease: CustomEase.create('custom', 'M0,0 C0.146,0.847 0.492,1 1,1 '),
+          stagger: 0.02,
+          duration: 1.2,
+        },
+        '<0.134'
+      )
+    })
+
+    // this.tl.fromTo(
+    //   this.text.chars.reverse(),
+    //   {
+    //     autoAlpha: 0,
+    //     y: 10,
+    //   },
+    //   {
+    //     autoAlpha: 1,
+    //     y: 0,
+    //     ease: 'power4.out',
+    //     stagger: 0.05,
+    //     duration: 0.4,
+    //     delay: 1,
+    //   }
+    // )
   }
 
   heroAnimation() {
