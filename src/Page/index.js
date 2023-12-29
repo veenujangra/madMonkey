@@ -7,7 +7,8 @@ import CardAnimation from '../animations/cardAnimation'
 import ColorTransition from '../animations/color'
 import gsap from 'gsap'
 import Lenis from '@studio-freight/lenis'
-import Preloader from '../preloader'
+import FeaturedClients from '../animations/featuredClients'
+// import Preloader from '../preloader'
 
 export default class Page {
   constructor(options) {
@@ -19,6 +20,7 @@ export default class Page {
       image: '[data-animation = image]',
       cards: '[data-animation = cards]',
       colorTransition: '[data-color]',
+      featuredClients: '[data-featuredClients]',
     }
     this.createSmoothScroll()
   }
@@ -86,6 +88,11 @@ export default class Page {
       return new ColorTransition({ element })
     })
     this.animations.push([...this.animationColor])
+
+    this.animationFeaturedClients = map(this.elements.featuredClients, (element) => {
+      return new FeaturedClients({ element })
+    })
+    this.animations.push([...this.animationFeaturedClients])
   }
 
   show(animation) {
