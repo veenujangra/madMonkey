@@ -8,6 +8,8 @@ export default class CardAnimation extends Animation {
     super({ element })
     this.element = element
 
+    this.distance = window.innerWidth > 768 ? '50rem' : '30rem'
+
     this.create()
     this.setAnimation()
   }
@@ -40,14 +42,14 @@ export default class CardAnimation extends Animation {
     this.tl = gsap.timeline({ delay: 0.3 })
     this.tl
       .to(this.elements[0], {
-        x: '-50rem',
+        x: `-${this.distance}`,
         duration: 1,
         ease: 'back.out(1.7)',
       })
       .to(
         this.elements[2],
         {
-          x: '50rem',
+          x: `${this.distance}`,
           duration: 1,
           ease: 'back.out(1.7)',
         },
