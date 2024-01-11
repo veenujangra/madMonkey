@@ -6,6 +6,8 @@ import CustomEase from 'gsap/CustomEase'
 export default class Preloader {
   constructor(options) {
     if (window.location.pathname === '/') {
+      window.scrollTo(0, 0)
+
       this.element = document.querySelector(options.element)
       this.elementMedia = document.querySelector(options.elementMedia)
       this.video = document.querySelector(options.elementVideo)
