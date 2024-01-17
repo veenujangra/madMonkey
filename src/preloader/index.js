@@ -25,7 +25,7 @@ export default class Preloader {
     }
   }
 
-  async loadWithoutPreloader() {
+  loadWithoutPreloader() {
     // await document.fonts.ready
 
     document.documentElement.classList.add('loaded')
