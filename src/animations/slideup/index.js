@@ -32,6 +32,7 @@ export default class SlideUp extends Animation {
     if (this.element.classList.contains('visible')) return
 
     this.tl = gsap.timeline({
+      delay: this.animationOptions.delay,
       onComplete: () => {
         this.element.classList.add('visible')
       },
@@ -48,7 +49,6 @@ export default class SlideUp extends Animation {
         y: 0,
         ease: this.animationOptions.ease,
         duration: this.animationOptions.duration,
-        delay: this.animationOptions.delay,
       }
     )
   }
