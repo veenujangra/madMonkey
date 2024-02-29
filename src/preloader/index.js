@@ -152,7 +152,7 @@ export default class Preloader {
 
   animateOut() {
     this.elementMedia.remove()
-    this.video.parentNode.remove()
+    // this.video.parentNode.remove()
 
     this.tl = gsap.timeline({
       onComplete: () => {
