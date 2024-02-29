@@ -10,7 +10,7 @@ export default class Preloader {
 
       this.element = document.querySelector(options.element)
       this.elementMedia = document.querySelector(options.elementMedia)
-      this.video = document.querySelector(options.elementVideo)
+      // this.video = document.querySelector(options.elementVideo)
       this.elementImage = this.elementMedia.querySelector('img')
       this.heroVideoElement = document.querySelector(options.heroVideo)
       this.preloaderTitle = document.querySelector(options.preloaderTitle)
@@ -56,21 +56,21 @@ export default class Preloader {
       })
     )
 
-    this.mediaPromises.push(
-      new Promise((res, rej) => {
-        this.video.load()
+    // this.mediaPromises.push(
+    //   new Promise((res, rej) => {
+    //     this.video.load()
 
-        this.video.addEventListener('canplaythrough', () => {
-          res()
-        })
-        this.video.addEventListener('error', function () {
-          rej(this.video)
-        })
-      }).then(() => {
-        this.video.play()
-      })
-    )
-    await document.fonts.ready
+    //     this.video.addEventListener('canplaythrough', () => {
+    //       res()
+    //     })
+    //     this.video.addEventListener('error', function () {
+    //       rej(this.video)
+    //     })
+    //   }).then(() => {
+    //     this.video.play()
+    //   })
+    // )
+    // await document.fonts.ready
 
     return Promise.all(this.mediaPromises)
   }
@@ -93,7 +93,6 @@ export default class Preloader {
     })
   }
 
-  // Not being used
   initTitle() {
     this.tl = gsap.timeline()
 

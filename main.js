@@ -18,7 +18,7 @@ class App {
     this.preloader = new Preloader({
       element: '.preloader_wrapper',
       elementMedia: '.preloader_media',
-      elementVideo: '#preloader-video',
+      // elementVideo: '#preloader-video',
       heroVideo: '#hero_video',
       preloaderTitle: '.preloader_title',
       playButton: '.home_hero_video_play_button',
