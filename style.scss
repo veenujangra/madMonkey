@@ -22,6 +22,19 @@
   opacity: 0;
 }
 
+.preloader_wrapper,
+.navbar {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.loaded {
+  .preloader_wrapper,
+  .navbar {
+    opacity: 1;
+  }
+}
+
 [data-animation='slideup'] {
   opacity: 0;
 }

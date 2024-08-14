@@ -75,9 +75,10 @@ export default class Preloader {
     return Promise.all(this.mediaPromises)
   }
 
-  create() {
+  async create() {
     // await this.loadMedia()
-
+    await document.fonts.ready
+    document.documentElement.classList.add('loaded')
     // this.animateIn()
     this.animateOut()
   }
@@ -216,7 +217,6 @@ export default class Preloader {
       },
       onComplete: () => {
         this.element.remove()
-        document.documentElement.classList.add('loaded')
       },
     })
 
