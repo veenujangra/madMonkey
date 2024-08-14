@@ -75,8 +75,8 @@ export default class Preloader {
     return Promise.all(this.mediaPromises)
   }
 
-  async create() {
-    await this.loadMedia()
+  create() {
+    // await this.loadMedia()
 
     // this.animateIn()
     this.animateOut()
